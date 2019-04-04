@@ -37,6 +37,24 @@ class App extends Component {
     }
   }
 
+  getRepos(type) {
+    return (e) => {
+      const login = this.state.userInfo.login;
+      ajax()
+        .get(`https://api.github.com/users/${login}/${type}`)
+        .then(response => {
+          this.setState({
+            [type]: response.map((repo, index) => (
+              {
+                name: response[index].name,
+                link: response[index].html_url
+              }
+            ))
+          });
+        })
+    }
+  }
+
   render() {
     return (
       <AppContent
@@ -44,6 +62,8 @@ class App extends Component {
         repos={this.state.repos}
         starred={this.state.starred}
         handleSearch={(e) => this.handleSearch(e)}
+        getRepos={this.getRepos('repos')}
+        getStarred={this.getRepos('starred')}
       />
     );
   }
