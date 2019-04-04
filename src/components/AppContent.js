@@ -10,13 +10,18 @@ import PropTypes from 'prop-types';
 const AppContent = ({ 
   userInfo, 
   repos, 
-  starred, 
+  starred,
+  isFetching,
   handleSearch,
   getRepos,
   getStarred
 }) => (
   <div className="app">
-    <Search handleSearch={handleSearch} />
+    <Search 
+      isDisabled={isFetching}
+      handleSearch={handleSearch} 
+    />
+    {isFetching && <div>Carregando... </div>}
     {!!userInfo && <UserInfo userinfo={userInfo} />}
     {!!userInfo && <Actions getRepos={getRepos} getStarred={getStarred} />}
 
