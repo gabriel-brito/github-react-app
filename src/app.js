@@ -23,23 +23,14 @@ class App extends Component {
       ajax()
         .get(`https://api.github.com/users/${value}`)
         .then(response => {
-          let {
-            name,
-            avatar_url,
-            login,
-            public_repos,
-            followers,
-            following
-          } = response;
-
           this.setState({
-            userinfo: {
-              followers,
-              following,
-              login,
-              photo: avatar_url,
-              repos: public_repos,
-              username: name
+            userInfo: {
+              followers: response.followers,
+              following: response.following,
+              login: response.login,
+              photo: response.avatar_url,
+              repos: response.public_repos,
+              username: response.name
             }
           });
         });
@@ -52,7 +43,7 @@ class App extends Component {
         userInfo={this.state.userInfo}
         repos={this.state.repos}
         starred={this.state.starred}
-        handleSearch={e => this.handleSearch(e)}
+        handleSearch={(e) => this.handleSearch(e)}
       />
     );
   }

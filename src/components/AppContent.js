@@ -1,10 +1,11 @@
 'use strict';
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import Search from './Search';
 import UserInfo from './UserInfo';
 import Actions from './Actions';
 import Repos from './Repos';
+import PropTypes from 'prop-types';
 
 const AppContent = ({ userInfo, repos, starred, handleSearch }) => (
   <div className="app">
